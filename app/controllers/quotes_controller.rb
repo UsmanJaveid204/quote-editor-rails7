@@ -15,7 +15,7 @@ class QuotesController < ApplicationController
       redirect_to quotes_path
     else
       flash[:error] = result.error
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,7 +32,7 @@ class QuotesController < ApplicationController
       redirect_to quotes_path
     else
       flash[:error] = result.error
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
