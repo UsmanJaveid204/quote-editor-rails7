@@ -1,8 +1,7 @@
-first:
-  name: 'test1'
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-second:
-  name: 'test2'
+one:
+  name: MyString
 
-third:
-  name: 'test3'
+two:
+  name: MyString
