@@ -1,4 +1,4 @@
-class Application
+class ApplicationInteractor
   include Interactor
 
   def error(message)
