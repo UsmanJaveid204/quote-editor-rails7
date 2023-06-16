@@ -15,7 +15,7 @@ class QuotesController < ApplicationController
       redirect_to quotes_path
     else
       flash[:error] = result.error
-      redirect_to_back
+      render :new
     end
   end
 
@@ -32,7 +32,7 @@ class QuotesController < ApplicationController
       redirect_to quotes_path
     else
       flash[:error] = result.error
-      redirect_to_back
+      render :edit
     end
   end
 
