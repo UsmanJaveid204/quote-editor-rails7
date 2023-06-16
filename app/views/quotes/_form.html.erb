@@ -4,7 +4,8 @@
       <%= quote.errors.full_messages.to_sentence.capitalize %>
     </div>
   <% end %>
-
-  <%= f.text_field :name, input_html: { autofocus: true } %>
-  <%= f.submit class: "btn btn--secondary" %>
+  <div class="d-flex justify-content-center">
+    <%= f.text_field :name, class: 'form-control', input_html: { autofocus: false } %>
+    <%= f.submit class: "btn btn-primary mx-2" %>
+  </div>
 <% end %>
