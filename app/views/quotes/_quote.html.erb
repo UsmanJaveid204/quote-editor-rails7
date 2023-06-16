@@ -1,8 +1,10 @@
-<tr>
-  <th scope="row" class="text-center"><%= quote.id %></th>
-  <td class="text-center"><%= link_to quote.name, quote_path(quote), class: "btn btn--light text-primary" %></td>
-  <td class="d-flex justify-content-center text-center">
-    <%= link_to "Edit", edit_quote_path(quote), class: "btn btn--light text-primary" %>
-    <%= button_to "Delete", quote_path(quote), method: :delete, class: "btn btn--light text-danger" %>
-  </td>
-</tr>
+<% quotes.each_with_index do | quote, index | %>
+  <tr>
+    <th scope="row" class="text-center"><%= index.succ %></th>
+    <td class="text-center"><%= link_to quote.name, quote_path(quote), class: "btn btn--light text-primary" %></td>
+    <td class="d-flex justify-content-center text-center">
+      <%= link_to "Edit", edit_quote_path(quote), class: "btn btn--light text-primary" %>
+      <%= button_to "Delete", quote_path(quote), method: :delete, class: "btn btn--light text-danger" %>
+    </td>
+  </tr>
+<% end %>
