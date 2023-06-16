@@ -1,8 +1,8 @@
 class UpdateQuote < ApplicationInteractor
-  delegate :quote, :quotes_params, to: :context
+  delegate :quote, :quote_params, to: :context
 
   def call
-    return if quote.update quotes_params
+    return if quote.update quote_params
 
     error quote.errors.full_messages.to_sentence
   end

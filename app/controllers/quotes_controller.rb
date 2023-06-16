@@ -2,13 +2,13 @@ class QuotesController < ApplicationController
   before_action :set_quote, except: %i[index]
 
   def index
-    @quotes = Quotes.all  
+    @quotes = Quote.all  
   end
 
   def new; end
 
   def create
-    result = CreateQuote.call quotes_params: quote_params
+    result = ::CreateQuote.call(quote_params: quote_params)
 
     if result.success?
       flash[:notice] = "Quote created successfully"
@@ -24,7 +24,7 @@ class QuotesController < ApplicationController
   def update
     result = UpdateQuote.call(
       quote: @quote,
-      quotes_params: quote_params
+      quote_params: quote_params
     )
 
     if result.success?
@@ -51,11 +51,11 @@ class QuotesController < ApplicationController
   private
 
   def set_quote
-    @quote = Quotes.find_by(id: params[:id])
-    @quote ||= Quotes.new
+    @quote = Quote.find_by(id: params[:id])
+    @quote ||= Quote.new
   end
 
-  def quotes_params
+  def quote_params
     params.require(:quote).permit(:name)
   end
 end
