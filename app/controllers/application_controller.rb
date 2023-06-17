@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
       redirect_back fallback_location: root_path, **opts
     end
   end
+
+  private
+
+  def current_company
+    @current_company ||= current_user.company if user_signed_in?
+  end
+
+  helper_method :current_company
 end
