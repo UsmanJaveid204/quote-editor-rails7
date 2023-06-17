@@ -16,7 +16,7 @@ class QuotesController < ApplicationController
     if result.success?
       respond_to do |format|
         format.html { redirect_to quotes_path notice: "Quote created successfully" }
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Quote created successfully" }
       end
     else
       render :edit, status: :unprocessable_entity
