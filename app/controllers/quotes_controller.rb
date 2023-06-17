@@ -8,7 +8,10 @@ class QuotesController < ApplicationController
   def new; end
 
   def create
-    result = ::CreateQuote.call(quote_params: quote_params)
+    result = CreateQuote.call(
+      current_company: current_company,
+      quote_params: quote_params
+    )
 
     if result.success?
       respond_to do |format|
@@ -52,7 +55,7 @@ class QuotesController < ApplicationController
   private
 
   def set_quote
-    @quote = Quote.find_by(id: params[:id])
+    @quote = current_company.quotes.find_by(id: params[:id])
     @quote ||= Quote.new
   end
 
