@@ -1,10 +1,12 @@
 <% quotes.each_with_index do | quote, index | %>
-  <tr>
-    <th scope="row" class="text-center"><%= index.succ %></th>
-    <td class="text-center"><%= link_to quote.name, quote_path(quote), class: "btn btn--light text-primary" %></td>
-    <td class="d-flex justify-content-center text-center">
+  <%= turbo_frame_tag quote do %>
+  <div class="d-flex justify-content-between">
+    <span scope="row" class="text-center"><%= index.succ %></span>
+    <span class="text-center"><%= link_to quote.name, quote_path(quote), class: "btn btn--light text-primary", data: { turbo_frame: "_top" } %></span>
+    <span class="d-flex justify-content-center text-center">
       <%= link_to "Edit", edit_quote_path(quote), class: "btn btn--light text-primary" %>
       <%= button_to "Delete", quote_path(quote), method: :delete, class: "btn btn--light text-danger" %>
-    </td>
-  </tr>
+    </span>
+  </div>
+  <% end %>
 <% end %>

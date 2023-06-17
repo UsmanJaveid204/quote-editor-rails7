@@ -2,7 +2,7 @@ class QuotesController < ApplicationController
   before_action :set_quote, except: %i[index]
 
   def index
-    @quotes = Quote.all  
+    @quotes = Quote.ordered
   end
 
   def new; end
@@ -11,11 +11,12 @@ class QuotesController < ApplicationController
     result = ::CreateQuote.call(quote_params: quote_params)
 
     if result.success?
-      flash[:notice] = "Quote created successfully"
-      redirect_to quotes_path
+      respond_to do |format|
+        format.html { redirect_to quotes_path notice: "Quote created successfully" }
+        format.turbo_stream
+      end
     else
-      flash[:error] = result.error
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -39,13 +40,13 @@ class QuotesController < ApplicationController
   def destroy
     result = DeleteQuote.call(quote: @quote)
 
-    if result.success?
-      flash[:notice] = "Deleted"
-    else
-      flash[:error] = result.error
+    respond_to do |format|
+      format.html do
+        redirect_to_back notice: "Quote was successfully destroyed." if result.success?
+        redirect_to_back notice: "Quote was not successfully destroyed." unless result.success?
+      end
+      format.turbo_stream
     end
-
-    redirect_to_back
   end
 
   private
