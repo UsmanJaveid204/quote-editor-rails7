@@ -2,7 +2,7 @@ class QuotesController < ApplicationController
   before_action :set_quote, except: %i[index]
 
   def index
-    @quotes = Quote.ordered
+    @quotes = current_company.quotes.ordered
   end
 
   def new; end

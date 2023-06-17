@@ -1,2 +1,2 @@
-<%= turbo_stream.prepend "quotes", partial: "quotes/quote", locals: { quotes: Quote.ordered } %>
+<%= turbo_stream.prepend "quotes", partial: "quotes/quote", locals: { quotes: current_company.quotes.ordered } %>
 <%= turbo_stream.update Quote.new, "" %>
